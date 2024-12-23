@@ -1,0 +1,11 @@
+Script de Backup para Switches Dell
+
+Número de dispositivos a procesar: 1
+
+Procesando switch sw-dell-backbone01 (192.168.1.253)...
+Ejecutando comando para sw-dell-backbone01 en 192.168.1.253
+Backup de sw-dell-backbone01 completado y guardado en ./dell/sw-dell-backbone01/startup_20241223-030001.xml
+--------------------------------------------------------------------------------
+Mon Dec 23 03:01:21 -03 2024
+--------------------------------------------------------------------------------
+ OK Email de éxito enviado!
