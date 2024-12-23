@@ -4,7 +4,7 @@
 
 # Configuración
 LOCAL_DIR=$(dirname "$0")
-BACKUP_PATH="./dell"
+BACKUP_PATH="/FullPath/Dell-backupBackBone-ssh/dell"
 CONF="$LOCAL_DIR/backupnsdell.conf"
 LOG="$LOCAL_DIR/logs/backupnsdell_$(date +%Y%m%d-%H%M%S).log"
 SSH_USER=USER1
