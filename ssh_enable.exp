@@ -1,0 +1,65 @@
+#!/usr/bin/expect -f
+
+# Verificar los argumentos de entrada
+if {[llength $argv] != 4} {
+    puts "Usage: $argv0 <username> <password> <host> <output_file>"
+    exit 1
+}
+
+set username [lindex $argv 0]
+set password [lindex $argv 1]
+set host [lindex $argv 2]
+set output_file [lindex $argv 3]
+
+# Establecer un tiempo de espera predeterminado
+set timeout 60
+
+# Iniciar la conexión SSH
+spawn ssh -o StrictHostKeyChecking=no -o KexAlgorithms=diffie-hellman-group14-sha1 -o Ciphers=aes256-ctr $username@$host
+
+# Guardar la salida en el archivo de destino
+log_file $output_file
+
+# Manejar la autenticación
+expect {
+    "password:" {
+        send "$password\r"
+        exp_continue
+    }
+    "yes/no" {
+        send "yes\r"
+        exp_continue
+    }
+    "*>" {
+        send "enable\r"
+        exp_continue
+    }
+    "*assword:" {
+        send "$password\r"
+        exp_continue
+    }
+    "*#" {
+        send "terminal length 0\r"
+    }
+}
+
+# Esperar el prompt nuevamente después de "terminal length 0"
+expect "*#"
+
+# Ejecutar el comando y guardar la salida en el archivo
+send "show running-config\r"
+
+# Manejar la paginación
+expect {
+    "More?" {
+        send " "
+        exp_continue
+    }
+    "*#" {
+        send "exit\r"
+    }
+}
+
+# Cerrar el archivo de registro
+expect eof
+log_file
