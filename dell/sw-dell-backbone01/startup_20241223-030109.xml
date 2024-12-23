@@ -1,0 +1,23 @@
+spawn ssh -o StrictHostKeyChecking=no -o KexAlgorithms=diffie-hellman-group14-sha1 -o Ciphers=aes256-ctr USER1@192.168.1.253
+USER1@192.168.1.253's password:
+sw-dell-backbone01>enable
+Password:
+
+
+ The SupportAssist EULA acceptance option has not been selected. SupportAssist
+ can be enabled once the SupportAssist EULA has been accepted. Use the:
+ 'support-assist activate' command to accept EULA and enable SupportAssist.
+
+sw-dell-backbone01#terminal length 0
+sw-dell-backbone01#show running-config
+Current Configuration ...
+! Version 9.11(2.4)
+! Last configuration change at Wed Dec 18 17:29:51 2024 by admin
+! Startup-config last updated at Wed Dec 18 17:30:16 2024 by admin
+!
+boot system stack-unit 0 primary system://A
+boot system stack-unit 0 secondary system://B
+boot system stack-unit 0 default system://A
+!
+hardware watchdog
+............................
